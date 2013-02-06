@@ -2,7 +2,7 @@
 session_start();
 
 function do_select($instance_url, $access_token) {
-    $query = "select id, name from contact where name like '%ray%' limit 100"
+    $query = "select name, pse__start_date__c from contact where account.name = 'Appirio' order by pse__start_date__c"
     
     $url = "$instance_url/services/data/v20.0/query?q=" . urlencode($query);
 
