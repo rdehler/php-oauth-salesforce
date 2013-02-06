@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 
 function do_select($instance_url, $access_token) {
     $query = "select name, pse__start_date__c from contact where account.name = 'Appirio' order by pse__start_date__c"
