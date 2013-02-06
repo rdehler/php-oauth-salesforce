@@ -1,3 +1,3 @@
 <?php
-echo "hello, world.";
+header("Location: oauth.php");
 ?>
