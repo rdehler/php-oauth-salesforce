@@ -171,6 +171,7 @@ function delete_account($id, $instance_url, $access_token) {
     <body>
         <tt>
             <?php
+/*
             $access_token = $_SESSION['access_token'];
             $instance_url = $_SESSION['instance_url'];
             if (!isset($access_token) || $access_token == "") {
@@ -183,6 +184,7 @@ function delete_account($id, $instance_url, $access_token) {
 
             //do_select($instance_url, $access_token);
 echo "here!";
+*/
             ?>
         </tt>
     </body>
