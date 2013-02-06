@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 
 function do_select($instance_url, $access_token) {
     $query = "select id, name from contact limit 100";
@@ -171,7 +171,6 @@ function delete_account($id, $instance_url, $access_token) {
     <body>
         <tt>
             <?php
-/*
             $access_token = $_SESSION['access_token'];
             $instance_url = $_SESSION['instance_url'];
             if (!isset($access_token) || $access_token == "") {
@@ -182,9 +181,7 @@ function delete_account($id, $instance_url, $access_token) {
                 die("Error - instance URL missing from session!");
             }
 
-            //do_select($instance_url, $access_token);
-echo "here!";
-*/
+            do_select($instance_url, $access_token);
             ?>
         </tt>
     </body>
