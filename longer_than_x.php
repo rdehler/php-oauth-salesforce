@@ -181,7 +181,8 @@ function delete_account($id, $instance_url, $access_token) {
                 die("Error - instance URL missing from session!");
             }
 
-            do_select($instance_url, $access_token);
+            //do_select($instance_url, $access_token);
+echo "here!";
             ?>
         </tt>
     </body>
