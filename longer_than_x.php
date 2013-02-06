@@ -1,6 +1,31 @@
 <?php
 session_start();
 
+function do_select($instance_url, $access_token) {
+    $query = "select name, pse__start_date__c from contact where account.name = 'Appirio' order by pse__start_date__c";
+    
+    $url = "$instance_url/services/data/v20.0/query?q=" . urlencode($query);
+
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER,
+            array("Authorization: OAuth $access_token"));
+
+    $json_response = curl_exec($curl);
+    curl_close($curl);
+
+    $response = json_decode($json_response, true);
+
+    $total_size = $response['totalSize'];
+
+    echo "$total_size record(s) returned<br/><br/>";
+    foreach ((array) $response['records'] as $record) {
+        echo $record['Id'] . ", " . $record['Name'] . "<br/>";
+    }
+    echo "<br/>";
+}
+
 function show_accounts($instance_url, $access_token) {
     $query = "SELECT Name, Id from Account LIMIT 100";
     $url = "$instance_url/services/data/v20.0/query?q=" . urlencode($query);
@@ -141,7 +166,7 @@ function delete_account($id, $instance_url, $access_token) {
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>REST/OAuth Example</title>
+        <title>Longer than X Employees</title>
     </head>
     <body>
         <tt>
@@ -156,24 +181,7 @@ function delete_account($id, $instance_url, $access_token) {
                 die("Error - instance URL missing from session!");
             }
 
-            show_accounts($instance_url, $access_token);
-
-            $id = create_account("My New Org", $instance_url, $access_token);
-
-            show_account($id, $instance_url, $access_token);
-
-            show_accounts($instance_url, $access_token);
-
-            update_account($id, "My New Org, Inc", "San Francisco",
-                    $instance_url, $access_token);
-
-            show_account($id, $instance_url, $access_token);
-
-            show_accounts($instance_url, $access_token);
-
-            delete_account($id, $instance_url, $access_token);
-
-            show_accounts($instance_url, $access_token);
+            do_select($instance_url, $access_token);
             ?>
         </tt>
     </body>
