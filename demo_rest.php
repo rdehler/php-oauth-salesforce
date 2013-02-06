@@ -148,7 +148,6 @@ function delete_account($id, $instance_url, $access_token) {
             <?php
             $access_token = $_SESSION['access_token'];
             $instance_url = $_SESSION['instance_url'];
-print_r($_SESSION);
             if (!isset($access_token) || $access_token == "") {
                 die("Error - access token missing from session!");
             }
